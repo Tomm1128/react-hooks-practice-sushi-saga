@@ -1,13 +1,25 @@
-import React from "react";
-import MoreButton from "./MoreButton";
+import React, { useState, useEffect } from "react"
+import MoreButton from "./MoreButton"
+import Sushi from "./Sushi"
+import { getSushi } from "../utils/fetchers"
 
 function SushiContainer(props) {
+  const [sushiList, setSushi] = useState([])
+
+  useEffect(() => {
+    getSushi().then((sushiResp) => setSushi(sushiResp))
+  }, [])
+
+  const sushiBelt = sushiList.map((sushi) => {
+    return <Sushi key={sushi.id} sushi={sushi} />
+  })
+
   return (
     <div className="belt">
-      {/* Render Sushi components here! */}
+      {sushiBelt}
       <MoreButton />
     </div>
-  );
+  )
 }
 
-export default SushiContainer;
+export default SushiContainer
