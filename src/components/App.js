@@ -23,15 +23,28 @@ function App() {
     return <h2>Loading...</h2>
   }
 
-  const updatePlates = (plate) => {
-    if (!emptyPlates) {
-      setEmptyPlates([plate])
-    } else if (!emptyPlates.includes(plate)) {
-      setEmptyPlates([...emptyPlates, plate])
-    }
+  const updateSushi = (id) => {
+    const updatedSushi = sushiList.map((sushi) => {
+      if (sushi.id === Number(id)) {
+        return {
+          ...sushi,
+          isEaten: true,
+        }
+      } else return sushi
+    })
+    setSushi(updatedSushi)
   }
 
-  console.log(emptyPlates)
+  const updatePlates = (id) => {
+    if (!emptyPlates) {
+      setEmptyPlates([id])
+    } else if (!emptyPlates.includes(id)) {
+      setEmptyPlates([...emptyPlates, id])
+    }
+    updateSushi(id)
+  }
+
+  // console.log(sushiList)
 
   return (
     <div className="app">
