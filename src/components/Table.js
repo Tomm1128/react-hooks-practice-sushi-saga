@@ -18,7 +18,7 @@ function Table({ plates = [], sushiWallet, updateSushiWallet, moneySpent }) {
         You have: ${sushiWallet - moneySpent} remaining!
       </h1>
       <button className="wallet-button" onClick={showForm}>
-        Add More to Wallet
+        {isShowing ? "Close Form" : "Add to Wallet"}
       </button>
       {isShowing ? <WalletForm updateSushiWallet={updateSushiWallet} /> : null}
       <div className="table">
