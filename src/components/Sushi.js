@@ -2,13 +2,13 @@ import React from "react"
 
 function Sushi({
   sushi: { id, name, img_url, price, isEaten },
-  updatePlates,
+  updateSushi,
   moneySpent,
   updateMoneySpent,
 }) {
   const onPlateClick = (event) => {
     if (isEaten === false && moneySpent + price < 100) {
-      updatePlates(event.target.id)
+      updateSushi(event.target.id)
       updateMoneySpent(price)
     } else if (moneySpent + price > 100) {
       alert("You do not have enough money fo that sushi!")
