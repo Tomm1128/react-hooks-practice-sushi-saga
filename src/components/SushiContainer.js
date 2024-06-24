@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import MoreButton from "./MoreButton"
 import Sushi from "./Sushi"
 
@@ -7,7 +7,12 @@ const initialSushi = {
   end: 4,
 }
 
-function SushiContainer({ sushiList, updatePlates }) {
+function SushiContainer({
+  sushiList,
+  updatePlates,
+  moneySpent,
+  updateMoneySpent,
+}) {
   const [pages, setPages] = useState(initialSushi)
 
   const currentBeltOfSushi = sushiList.slice(pages.start, pages.end)
@@ -24,7 +29,15 @@ function SushiContainer({ sushiList, updatePlates }) {
   }
 
   const sushiBelt = currentBeltOfSushi.map((sushi) => {
-    return <Sushi key={sushi.id} sushi={sushi} updatePlates={updatePlates} />
+    return (
+      <Sushi
+        key={sushi.id}
+        sushi={sushi}
+        updatePlates={updatePlates}
+        moneySpent={moneySpent}
+        updateMoneySpent={updateMoneySpent}
+      />
+    )
   })
 
   return (

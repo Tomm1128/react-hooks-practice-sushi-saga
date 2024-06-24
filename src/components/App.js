@@ -5,7 +5,8 @@ import { getSushi } from "../utils/fetchers"
 
 function App() {
   const [sushiList, setSushi] = useState(null)
-  const [emptyPlates, setEmptyPlates] = useState(null)
+  const [emptyPlates, setEmptyPlates] = useState([])
+  const [moneySpent, setMoneySpent] = useState(0)
 
   useEffect(() => {
     getSushi().then((sushiResp) => {
@@ -44,12 +45,19 @@ function App() {
     updateSushi(id)
   }
 
-  // console.log(sushiList)
+  const updateMoneySpent = (price) => {
+    setMoneySpent(moneySpent + price)
+  }
 
   return (
     <div className="app">
-      <SushiContainer sushiList={sushiList} updatePlates={updatePlates} />
-      <Table />
+      <SushiContainer
+        sushiList={sushiList}
+        updatePlates={updatePlates}
+        moneySpent={moneySpent}
+        updateMoneySpent={updateMoneySpent}
+      />
+      <Table plates={emptyPlates} moneySpent={moneySpent} />
     </div>
   )
 }
