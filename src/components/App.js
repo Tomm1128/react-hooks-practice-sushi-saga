@@ -5,6 +5,7 @@ import Table from "./Table"
 function App() {
   const [emptyPlates, setEmptyPlates] = useState([])
   const [moneySpent, setMoneySpent] = useState(0)
+  const [sushiWallet, setSushiWallet] = useState(100)
 
   const updatePlates = (id) => {
     if (!emptyPlates) {
@@ -12,6 +13,10 @@ function App() {
     } else if (!emptyPlates.includes(id)) {
       setEmptyPlates([...emptyPlates, id])
     }
+  }
+
+  const updateSushiWallet = (amount) => {
+    setSushiWallet(sushiWallet + amount)
   }
 
   const updateMoneySpent = (price) => {
@@ -22,10 +27,16 @@ function App() {
     <div className="app">
       <SushiContainer
         updatePlates={updatePlates}
+        sushiWallet={sushiWallet}
         moneySpent={moneySpent}
         updateMoneySpent={updateMoneySpent}
       />
-      <Table plates={emptyPlates} moneySpent={moneySpent} />
+      <Table
+        plates={emptyPlates}
+        sushiWallet={sushiWallet}
+        updateSushiWallet={updateSushiWallet}
+        moneySpent={moneySpent}
+      />
     </div>
   )
 }

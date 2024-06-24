@@ -85,3 +85,9 @@ body {
   margin: auto;
   margin-top: 65px;
 }
+
+.wallet-form {
+  grid-area: rm;
+  margin: auto;
+  margin-top: 150px;
+}

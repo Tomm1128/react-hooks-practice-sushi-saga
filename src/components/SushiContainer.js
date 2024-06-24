@@ -8,7 +8,12 @@ const initialSushi = {
   end: 4,
 }
 
-function SushiContainer({ updatePlates, moneySpent, updateMoneySpent }) {
+function SushiContainer({
+  updatePlates,
+  sushiWallet,
+  moneySpent,
+  updateMoneySpent,
+}) {
   const [sushiList, setSushi] = useState(null)
   const [pages, setPages] = useState(initialSushi)
 
@@ -60,6 +65,7 @@ function SushiContainer({ updatePlates, moneySpent, updateMoneySpent }) {
         key={sushi.id}
         sushi={sushi}
         updateSushi={updateSushi}
+        sushiWallet={sushiWallet}
         moneySpent={moneySpent}
         updateMoneySpent={updateMoneySpent}
       />
