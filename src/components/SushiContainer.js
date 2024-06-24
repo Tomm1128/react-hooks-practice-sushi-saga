@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from "react"
 import MoreButton from "./MoreButton"
 import Sushi from "./Sushi"
-import { getSushi } from "../utils/fetchers"
 
-function SushiContainer(props) {
-  const [sushiList, setSushi] = useState([])
+const initialSushi = {
+  start: 0,
+  end: 4,
+}
 
-  useEffect(() => {
-    getSushi().then((sushiResp) => setSushi(sushiResp))
-  }, [])
+function SushiContainer({ sushiList, updatePlates }) {
+  const [pages, setPages] = useState(initialSushi)
 
-  const sushiBelt = sushiList.map((sushi) => {
-    return <Sushi key={sushi.id} sushi={sushi} />
+  const currentBeltOfSushi = sushiList.slice(pages.start, pages.end)
+
+  const nextBeltOfSushi = () => {
+    if (pages.start < 96) {
+      setPages({
+        start: pages.start + 4,
+        end: pages.end + 4,
+      })
+    } else {
+      setPages(initialSushi)
+    }
+  }
+
+  const sushiBelt = currentBeltOfSushi.map((sushi) => {
+    return <Sushi key={sushi.id} sushi={sushi} updatePlates={updatePlates} />
   })
 
   return (
     <div className="belt">
       {sushiBelt}
-      <MoreButton />
+      <MoreButton nextBeltOfSushi={nextBeltOfSushi} />
     </div>
   )
 }
