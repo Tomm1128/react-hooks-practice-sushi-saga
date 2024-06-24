@@ -79,3 +79,15 @@ body {
   width: 700px;
   margin: auto;
 }
+
+.wallet-button {
+  grid-area: rm;
+  margin: auto;
+  margin-top: 65px;
+}
+
+.wallet-form {
+  grid-area: rm;
+  margin: auto;
+  margin-top: 150px;
+}

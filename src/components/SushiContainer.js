@@ -1,13 +1,53 @@
-import React from "react";
-import MoreButton from "./MoreButton";
+import React, { useState, useEffect } from "react"
+import MoreButton from "./MoreButton"
+import Sushi from "./Sushi"
 
-function SushiContainer(props) {
-  return (
-    <div className="belt">
-      {/* Render Sushi components here! */}
-      <MoreButton />
-    </div>
-  );
+const initialSushi = {
+  start: 0,
+  end: 4,
 }
 
-export default SushiContainer;
+function SushiContainer({
+  sushiList,
+  updateSushi,
+  sushiWallet,
+  moneySpent,
+  updateMoneySpent,
+}) {
+  const [pages, setPages] = useState(initialSushi)
+
+  const currentBeltOfSushi = sushiList.slice(pages.start, pages.end)
+
+  const nextBeltOfSushi = () => {
+    if (pages.start < 96) {
+      setPages({
+        start: pages.start + 4,
+        end: pages.end + 4,
+      })
+    } else {
+      setPages(initialSushi)
+    }
+  }
+
+  const sushiBelt = currentBeltOfSushi.map((sushi) => {
+    return (
+      <Sushi
+        key={sushi.id}
+        sushi={sushi}
+        updateSushi={updateSushi}
+        sushiWallet={sushiWallet}
+        moneySpent={moneySpent}
+        updateMoneySpent={updateMoneySpent}
+      />
+    )
+  })
+
+  return (
+    <div className="belt">
+      {sushiBelt}
+      <MoreButton nextBeltOfSushi={nextBeltOfSushi} />
+    </div>
+  )
+}
+
+export default SushiContainer
